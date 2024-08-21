@@ -2,6 +2,7 @@
   "name": "next-auth",
   "version": "0.1.0",
   "private": true,
+
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +10,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/next-js": "^2.2.0",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "framer-motion": "^11.3.28",
+    "mongoose": "^8.5.2",
+    "next": "14.2.5",
+    "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.5"
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "eslint": "^8",
