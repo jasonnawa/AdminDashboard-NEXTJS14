@@ -1,5 +1,5 @@
 import connectDB from "@/lib/db";
-import User from "@/models/User";
+import { User } from "@/lib/models";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bycrypt from "bcryptjs"
@@ -10,7 +10,7 @@ export const handler = NextAuth({
         CredentialsProvider({
             name: "credentials",
             credentials: {
-                username: {label: 'Username', type: 'text'},
+                email: {label: 'Email', type: 'email'},
                 password: {label: 'Password', type: 'password'}
             },
             
@@ -19,16 +19,17 @@ export const handler = NextAuth({
                 await connectDB()
 
                 try {
-                    const user = await User.findOne({username: credentials.username})
+                    const jason = await User.find()
+                    const user = await User.findOne({email: credentials.email})
+                    console.log(user)
                     if (user){
-                        const isPasswordCorrect= await bycrypt.compare(
-                            credentials.password,
-                            user.password
-                        );
-
+                        //const isPasswordCorrect= await bycrypt.compare(
+                          //  credentials.password,
+                            //user.password  );
+                            const isPasswordCorrect = user.password === credentials.password
                      
                      if(isPasswordCorrect){
-                        return {name : user.username}
+                        return {name : user.username, email : user.email, image: user.profilePicture }
                      }
                     }
                 } catch (error) {
